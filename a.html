@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECAT - Educational Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #A8C0D4, #A2C2E8); /* Soft pastel gradient */
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            animation: backgroundAnimation 15s ease-in-out infinite; /* Slow, gentle color transitions */
+            position: relative;
+        }
+
+        /* Gentle Background Animation */
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #A8C0D4, #A2C2E8); }
+            25% { background: linear-gradient(135deg, #E3D6F7, #D1C4E9); }
+            50% { background: linear-gradient(135deg, #B8E0D2, #E6F7F3); }
+            75% { background: linear-gradient(135deg, #F1F1F1, #F0F4F8); }
+            100% { background: linear-gradient(135deg, #A8C0D4, #A2C2E8); }
+        }
+
+        /* Title Animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #4CAF50; /* Soft green */
+            text-transform: uppercase;
+            animation: welcomeTextAnimation 3s ease-out;
+        }
+
+        /* Welcome Text Animation */
+        @keyframes welcomeTextAnimation {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #555;
+            margin-top: 1rem;
+            animation: fadeIn 3s ease-out;
+        }
+
+        .btn {
+            background: #4CAF50; /* Soft green */
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        /* Login Panel Styles */
+        .login-panel {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .login-panel h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            padding: 1rem;
+            margin: 1rem 0;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+            background: #f4f4f4;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            padding: 1rem;
+            background: #2196F3; /* Calm blue */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 80%;
+        }
+
+        .login-form button:hover {
+            background: #1976D2;
+        }
+
+        /* Music Play Button */
+        .music-btn {
+            margin-top: 20px;
+            padding: 15px 25px;
+            background-color: #2196F3; /* Calm blue */
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            animation: bounce 2s infinite;
+        }
+
+        .music-btn:hover {
+            background-color: #1976D2;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Welcome Text */
+        .welcome-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Student and Admin Content Section */
+        .content-section {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .content-section h3 {
+            color: #333;
+        }
+
+        .content-section iframe {
+            width: 80%;
+            height: 450px;
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="background-music">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <header>
+        <h1>Welcome to ECAT</h1>
+        <p>Transforming Lives, One Coaching Session at a Time. Your Success Story Starts Here.</p>
+    </header>
+
+    <!-- Music Play Button -->
+    <div>
+        <button class="music-btn" onclick="toggleMusic()">Play Music</button>
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="welcome-text">Welcome to ECAT!</div>
+
+    <!-- Student Login Panel -->
+    <div id="student-login" class="login-panel">
+        <h2>Student Login</h2>
+        <div class="login-form">
+            <input type="password" id="student-password" placeholder="Enter Password">
+            <button onclick="studentLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Login Panel -->
+    <div id="admin-login" class="login-panel">
+        <h2>Admin Login</h2>
+        <div class="login-form">
+            <input type="password" id="admin-password" placeholder="Enter Admin Password">
+            <button onclick="adminLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="login-panel" style="display: none;">
+        <h2>Admin Panel</h2>
+        <div>
+            <h3>Change Student Password</h3>
+            <input type="password" id="new-password" placeholder="Enter New Password">
+            <button onclick="changePassword()">Change Password</button>
+        </div>
+        <div>
+            <h3>Update YouTube Video Link</h3>
+            <input type="text" id="youtube-link" placeholder="Enter YouTube Video ID">
+            <button onclick="updateYoutubeLink()">Update Video</button>
+        </div>
+        <div>
+            <h3>Update Google Meet Link</h3>
+            <input type="text" id="meet-link" placeholder="Enter Google Meet Link">
+            <button onclick="updateMeetLink()">Update Meet Link</button>
+        </div>
+    </div>
+
+    <!-- Content after Student Login -->
+    <div id="student-content" class="content-section">
+        <h3>YouTube Video:</h3>
+        <div>
+            <!-- Embedded YouTube Video -->
+            <iframe id="youtube-video" src="https://www.youtube.com/embed/VIDEO_ID" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Google Meet Link:</h3>
+        <p><a href="https://meet.google.com/MEET_LINK" target="_blank">Join Google Meet</a></p>
+    </div>
+
+    <script>
+        // Default passwords
+        const defaultStudentPassword = "12345";
+        const adminPassword = "Password1*";
+
+        let studentPassword = defaultStudentPassword;
+
+        // Music Player
+        const audio = document.getElementById("background-music");
+
+        // Toggle Music Play/Pause Function
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    alert("Unable to play music. Please interact with the page first.");
+                });
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Student Login Function
+        function studentLogin() {
+            const password = document.getElementById("student-password").value;
+            if (password === studentPassword) {
+                alert("Login successful!");
+                document.getElementById("student-login").style.display = "none";
+                document.getElementById("student-content").style.display = "block";
+            } else {
+                alert("Incorrect password!");
+            }
+        }
+
+        // Admin Login Function
+        function adminLogin() {
+            const password = document.getElementById("admin-password").value;
+            if (password === adminPassword) {
+                document.getElementById("admin-login").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+            } else {
+                alert("Incorrect admin password!");
+            }
+        }
+
+        // Change Student Password Function
+        function changePassword() {
+            const newPassword = document.getElementById("new-password").value;
+            if (newPassword) {
+                studentPassword = newPassword;
+                alert("Password changed successfully!");
+                document.getElementById("new-password").value = "";
+            } else {
+                alert("Please enter a new password.");
+            }
+        }
+
+        // Update YouTube Video Link Function
+        function updateYoutubeLink() {
+            const newVideoId = document.getElementById("youtube-link").value;
+            if (newVideoId) {
+                document.getElementById("youtube-video").src = `https://www.youtube.com/embed/${newVideoId}`;
+                alert("YouTube Video updated successfully!");
+                document.getElementById("youtube-link").value = "";
+            } else {
+                alert("Please enter a valid YouTube Video ID.");
+            }
+        }
+
+        // Update Google Meet Link Function
+        function updateMeetLink() {
+            const newMeetLink = document.getElementById("meet-link").value;
+            if (newMeetLink) {
+                alert("Google Meet link updated successfully!");
+                document.getElementById("meet-link").value = "";
+            } else {
+                alert("Please enter a valid Google Meet link.");
+            }
+        }
+    </script>
+</body>
+</html>
